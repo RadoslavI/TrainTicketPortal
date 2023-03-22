@@ -1,0 +1,1 @@
+This is a portal system that includes distance-based pricing for train tickets. It offers basic and advanced train search options, such as travel to cities, time ranges, and one-way or round-trip travel. 
