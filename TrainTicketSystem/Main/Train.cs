@@ -13,7 +13,5 @@ namespace Main
         public DateTime DepartureTime { get; set; }
         public int AvailableSeats { get; set; }
         public double Price { get; set; }
-        public bool IsAvailable 
-            => AvailableSeats > 0;
     }
 }
