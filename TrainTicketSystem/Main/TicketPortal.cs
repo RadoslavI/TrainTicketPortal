@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Main
+namespace TicketSystem
 {
     public class TicketPortal
     {
@@ -31,30 +31,37 @@ namespace Main
             trains.Remove(train);
         }
 
-        public Train SearchTrain(string departure, string destination, DateTime departureTime)
+        public Train SearchTrain(string departure, string destination, string departureTime)
         {
             return trains.Where(t =>
             t.Departure == departure &&
             t.Destination == destination &&
-            t.DepartureTime.Date == departureTime.Date &&
-            t.DepartureTime.TimeOfDay == departureTime.TimeOfDay)
+            t.DepartureTime == departureTime)
             .FirstOrDefault();
         }
 
-        public void Reserve(string departure, string destination, DateTime departureTime, int numberOfTickets)
+        public void Reserve(string departure, string destination, string departureTime, 
+            int numberOfTickets, CardType card, TicketType ticket, bool underSixteen)
         {
-            var searchedTrain = SearchTrain(departure, destination, departureTime);
+            Train searchedTrain = SearchTrain(departure, destination, departureTime);
             if (searchedTrain != null) 
             {
                 if (searchedTrain.AvailableSeats - numberOfTickets >= 0)
                 {
-                    Console.WriteLine("Successfuly reserved a seat on the selected train!");
+                    double cost = calculateTicketPrice(departureTime, card, ticket, searchedTrain.Price,
+                        numberOfTickets, underSixteen);
+                    Console.WriteLine($"That would cost you {cost}$");
+                    Console.WriteLine("Tou have successfully reserved a seat on the selected train!");
                     searchedTrain.AvailableSeats -= numberOfTickets;
                 }
                 else
                 {
                     Console.WriteLine("The selected train is full, please choose another one.");
                 }
+            }
+            else
+            {
+                Console.WriteLine("No such train exists!");
             }
         }
 
