@@ -21,6 +21,10 @@ namespace TicketSystem
         {
             trains = new List<Train>();
         }
+
+        public int TrainCount 
+            => trains.Count;
+
         public void AddTrain(Train train)
         {
             trains.Add(train);

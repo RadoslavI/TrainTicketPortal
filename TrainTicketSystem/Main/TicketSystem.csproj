@@ -46,7 +46,7 @@
     <Compile Include="TicketPortal.cs" />
     <Compile Include="TicketType.cs" />
     <Compile Include="Train.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
