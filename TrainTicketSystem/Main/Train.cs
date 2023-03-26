@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Main;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,7 @@ namespace TicketSystem
         public string DepartureTime { get; set; }
         public int AvailableSeats { get; set; }
         public double Price { get; set; }
+        public ICollection<Reservation> Reservations { get; set; } 
+            = new List<Reservation>();
     }
 }

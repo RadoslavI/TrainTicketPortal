@@ -43,11 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CardType.cs" />
+    <Compile Include="Reservation.cs" />
     <Compile Include="TicketPortal.cs" />
     <Compile Include="TicketType.cs" />
     <Compile Include="Train.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Main;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,10 +17,12 @@ namespace TicketSystem
         public static readonly TimeSpan NINETEEN_THIRTY = new TimeSpan(19, 30, 0);
 
         private readonly ICollection<Train> trains;
+        private readonly ICollection<Reservation> reservations;
 
         public TicketPortal()
         {
             trains = new List<Train>();
+            reservations = new List<Reservation>();
         }
 
         public int TrainCount 
@@ -43,29 +46,30 @@ namespace TicketSystem
             t.DepartureTime == departureTime);
         }
 
-        public void Reserve(string departure, string destination, string departureTime, 
-            int numberOfTickets, CardType card, TicketType ticket, bool underSixteen)
+        public void CreateReservation(Train train, User user, TicketType ticket, int numberOfTickets)
         {
-            Train searchedTrain = SearchTrain(departure, destination, departureTime);
-            if (searchedTrain != null) 
-            {
-                if (searchedTrain.AvailableSeats - numberOfTickets >= 0)
-                {
-                    double cost = calculateTicketPrice(departureTime, card, ticket, searchedTrain.Price,
-                        numberOfTickets, underSixteen);
-                    Console.WriteLine($"That would cost you {cost}$");
-                    Console.WriteLine("Tou have successfully reserved a seat on the selected train!");
-                    searchedTrain.AvailableSeats -= numberOfTickets;
-                }
-                else
-                {
-                    Console.WriteLine("The selected train is full, please choose another one.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("No such train exists!");
-            }
+             if (train.AvailableSeats - numberOfTickets >= 0)
+             {
+                 double cost = calculateTicketPrice(train.DepartureTime, user.Cardtype, ticket, train.Price,
+                     numberOfTickets, user.HasAChild);
+                 Console.WriteLine($"That would cost you {cost}$");
+                 Console.WriteLine($"{user.Name} have successfully reserved {numberOfTickets} seats on the selected train!");
+                 train.AvailableSeats -= numberOfTickets;
+                var reservation = new Reservation(user, train, ticket);
+                reservations.Add(reservation);
+             }
+             else
+             {
+                 Console.WriteLine("The selected train is full, please choose another one.");
+             }
+        }
+
+        public List<Reservation> GetReservations(User user)
+        => reservations.Where(r => r.User == user).ToList();
+
+        public void DeleteReservation(Reservation reservation)
+        {
+            reservations.Remove(reservation);
         }
 
         public double calculateTicketPrice(string time, CardType card, TicketType ticket,
