@@ -1,7 +1,7 @@
 ﻿using System;
 namespace TicketSystem
 {
-    class StartUp
+    public static class StartUp
     {
         static void Main(string[] args)
         {

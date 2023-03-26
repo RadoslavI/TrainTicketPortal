@@ -36,10 +36,8 @@ namespace TicketSystem.Tests
         public void SearchTrain_Positive_ShouldReturn()
         {
             //Arrange
-            var searchTrain = new Train();
-
             //Act
-            searchTrain = portal.SearchTrain("Sofia", "Plovdiv", "8");
+            var searchTrain = portal.SearchTrain("Sofia", "Plovdiv", "8");
 
             //Assert
             Assert.That(train, Is.SameAs(searchTrain));
@@ -49,10 +47,8 @@ namespace TicketSystem.Tests
         public void SearchTrain_Negative_ShouldNotReturn()
         {
             //Arrange
-            var searchTrain = new Train();
-
             //Act
-            searchTrain = portal.SearchTrain("Plovdiv", "Plovdiv", "8");
+            var searchTrain = portal.SearchTrain("Plovdiv", "Plovdiv", "8");
 
             //Assert
             Assert.That(train, Is.Not.SameAs(searchTrain));

@@ -10,10 +10,10 @@ namespace TicketSystem
 {
     public class TicketPortal
     {
-        public static TimeSpan SEVEN_THIRTY = new TimeSpan(7, 30, 0);
-        public static TimeSpan NINE_THIRTY = new TimeSpan(9, 30, 0);
-        public static TimeSpan SIXTEEN = new TimeSpan(16, 0, 0);
-        public static TimeSpan NINETEEN_THIRTY = new TimeSpan(19, 30, 0);
+        public static readonly TimeSpan SEVEN_THIRTY = new TimeSpan(7, 30, 0);
+        public static readonly TimeSpan NINE_THIRTY = new TimeSpan(9, 30, 0);
+        public static readonly TimeSpan SIXTEEN = new TimeSpan(16, 0, 0);
+        public static readonly TimeSpan NINETEEN_THIRTY = new TimeSpan(19, 30, 0);
 
         private readonly ICollection<Train> trains;
 
@@ -37,11 +37,10 @@ namespace TicketSystem
 
         public Train SearchTrain(string departure, string destination, string departureTime)
         {
-            return trains.Where(t =>
+            return trains.FirstOrDefault(t =>
             t.Departure == departure &&
             t.Destination == destination &&
-            t.DepartureTime == departureTime)
-            .FirstOrDefault();
+            t.DepartureTime == departureTime);
         }
 
         public void Reserve(string departure, string destination, string departureTime, 
@@ -99,7 +98,7 @@ namespace TicketSystem
             }
             else if (card == CardType.RETIREMENT)
             {
-                finalPrice = (basePrice * 0.66) + (--numberOfTickets * basePrice);
+                finalPrice = (basePrice * 0.66) + ((numberOfTickets - 1)  * basePrice);
             }
             else
             {
