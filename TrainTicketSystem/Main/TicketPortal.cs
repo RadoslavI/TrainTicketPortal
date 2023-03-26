@@ -52,9 +52,10 @@ namespace TicketSystem
              {
                  double cost = calculateTicketPrice(train.DepartureTime, user.Cardtype, ticket, train.Price,
                      numberOfTickets, user.HasAChild);
-                 Console.WriteLine($"That would cost you {cost}$");
-                 Console.WriteLine($"{user.Name} have successfully reserved {numberOfTickets} seats on the selected train!");
-                 train.AvailableSeats -= numberOfTickets;
+                Console.WriteLine($"That would cost you {cost}$");
+                Console.WriteLine($"{user.Name} have successfully reserved {numberOfTickets} seats on the selected train!");
+                train.AvailableSeats -= numberOfTickets;
+
                 var reservation = new Reservation(user, train, ticket);
                 reservations.Add(reservation);
              }

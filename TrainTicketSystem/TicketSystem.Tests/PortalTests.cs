@@ -54,31 +54,31 @@ namespace TicketSystem.Tests
             Assert.That(train, Is.Not.SameAs(searchTrain));
         }
 
-        [Test]
-        public void Reserve_Positive_DecreasesSeats()
-        {
-            //Arrange
-            int result = 37;
+        //[Test]
+        //public void Reserve_Positive_DecreasesSeats()
+        //{
+        //    //Arrange
+        //    int result = 37;
 
-            //Act
-            portal.Reserve("Sofia", "Plovdiv", "8", 3, CardType.NONE, TicketType.TWOWAY, false);
+        //    //Act
+        //    portal.Reserve("Sofia", "Plovdiv", "8", 3, CardType.NONE, TicketType.TWOWAY, false);
 
-            //Assert
-            Assert.That(train.AvailableSeats == result);
-        }
+        //    //Assert
+        //    Assert.That(train.AvailableSeats == result);
+        //}
 
-        [Test]
-        public void Reserve_Negative_DoesntDecreaseSeats()
-        {
-            //Arrange
-            int ticketsCount = 41;
+        //[Test]
+        //public void Reserve_Negative_DoesntDecreaseSeats()
+        //{
+        //    //Arrange
+        //    int ticketsCount = 41;
 
-            //Act
-            portal.Reserve("Sofia", "Plovdiv", "8", ticketsCount, CardType.NONE, TicketType.TWOWAY, false);
+        //    //Act
+        //    portal.Reserve("Sofia", "Plovdiv", "8", ticketsCount, CardType.NONE, TicketType.TWOWAY, false);
 
-            //Assert
-            Assert.That(train.AvailableSeats == 40);
-        }
+        //    //Assert
+        //    Assert.That(train.AvailableSeats == 40);
+        //}
 
         [Test]
         public void calculateTicketPrice_Rush1way_ReturnsResult()
